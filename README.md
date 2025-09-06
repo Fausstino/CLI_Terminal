@@ -8,5 +8,5 @@ git clone https://github.com/Fausstino/cli_terminal
 ```
 #### Step 2: Launch *Terminal* with arguments (if you wish):
 ```bash
-python3 terminal.py -logfile
+python3 terminal.py -logfile file.csv
 ```
