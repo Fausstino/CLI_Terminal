@@ -9,7 +9,7 @@ class Terminal:
     
     def __init__(self):
         self.user = os.popen('whoami').read().strip()
-        self.log_path = os.path.join(os.getcwd(), "log.csv")
+        #self.log_path = os.path.join(os.getcwd(), "log.csv")
         self.start_script = ""
         self.get_arguments()
         self.vfs_path = ""
@@ -49,12 +49,13 @@ class Terminal:
         if args.verbose:
             print("ok")
         if args.logfile:
-            print(self.log_path)
-
+            self.log_path = args.logfile
+            with open(args.logfile, 'w', encoding='UTF-8', newline='') as file:
+                writer = csv.writer(file)
 
 
     def logger(self, to_write):
-        with open('log.csv', 'a', encoding='UTF-8', newline='') as file:  # 'a' вместо 'w'
+        with open(self.log_path, 'a', encoding='UTF-8', newline='') as file:  # 'a' вместо 'w'
             writer = csv.writer(file)
             writer.writerow([to_write])
 
