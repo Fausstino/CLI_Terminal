@@ -1,0 +1,1 @@
+python3 terminal.py --logfile log.csv
