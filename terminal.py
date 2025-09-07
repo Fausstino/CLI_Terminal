@@ -13,8 +13,9 @@ class Terminal:
 
         #self.log_path = os.path.join(os.getcwd(), "log.csv")
         self.start_script = ""
+        self.vfs_path = os.path.join(os.getcwd(), "vfs")
+
         self.get_arguments()
-        self.vfs_path = ""
         
         
     def get_command(self, command):
@@ -49,8 +50,9 @@ class Terminal:
 
     def get_arguments(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument('--logfile', '-l', help="path to log file")
-        parser.add_argument('--script', '-s', help="path to start script]")
+        parser.add_argument('--logfile', '-l', help="Path to log file")
+        parser.add_argument('--script', '-s', help="Path to script")
+        parser.add_argument('--vfs', '-vfs', help="Path to Virtual File System")
         args = parser.parse_args()
 
 
@@ -69,6 +71,8 @@ class Terminal:
                     print(("".join(row)))
                     self.get_command("".join(row))
 
+        if args.vfs:
+            print(self.vfs_path)
 
     def logger(self, to_write):
         with open(self.log_path, 'a', encoding='UTF-8', newline='') as file:  # 'a' вместо 'w'
