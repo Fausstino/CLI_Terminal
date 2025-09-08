@@ -3,7 +3,7 @@ import subprocess
 import argparse
 import csv
 from datetime import datetime
-
+from vfs import VFS
 
 class Terminal:
     
@@ -13,8 +13,9 @@ class Terminal:
 
         #self.log_path = os.path.join(os.getcwd(), "log.csv")
         self.start_script = ""
-        self.vfs_path = os.path.join(os.getcwd(), "vfs")
-
+        #self.vfs_path = os.path.join(os.getcwd(), "vfs")
+        self.vfs_path = ""
+        
         self.get_arguments()
         
         
@@ -72,7 +73,11 @@ class Terminal:
                     self.get_command("".join(row))
 
         if args.vfs:
-            print(self.vfs_path)
+            if os.path.exists(args.vfs):
+                self.vfs_path = args.vfs  # Устанавливаем путь
+                self.vfs = VFS(self.vfs_path)
+                print(self.vfs.filesystem)
+                print(f"VFS path set to: {self.vfs_path}")
 
     def logger(self, to_write):
         with open(self.log_path, 'a', encoding='UTF-8', newline='') as file:  # 'a' вместо 'w'
