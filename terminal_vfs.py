@@ -164,11 +164,40 @@ class Terminal:
                     print(os.environ.get(var_name, f"Variable {var_name} not found"))
                 except:
                     print("")
-            elif command.startswith("echo "):
-                text = command[5:]
-                if (text.startswith('"') and text.endswith('"')) or (text.startswith("'") and text.endswith("'")):
-                    text = text[1:-1]
-                print(text)
+            elif command.startswith("echo"):
+                if len(command) > 4:
+                    text = command[5:]
+                    if (text.startswith('"') and text.endswith('"')) or (text.startswith("'") and text.endswith("'")):
+                        text = text[1:-1]
+                    print(text)
+                else:
+                    pass
+        
+            elif command.startswith("ls"):
+                print("ls: -a -t -m")
+            
+            elif command.startswith("cd"):
+                if len(command) == 2:
+                    print("cd: missing operand")
+                else:
+                    print("cd: cd")
+
+            elif command.startswith("ls "):
+                path = command[3:].strip()
+                self.vfs_ls(path)
+            elif command == "cd":
+                print("cd: missing operand")
+                self.error_flag = True
+            elif command.startswith("cd "):
+                path = command[3:].strip()
+                self.vfs_cd(path)
+            elif command == "pwd":
+                print(self.current_vfs_path)
+            elif command.startswith("cat "):
+                path = command[4:].strip()
+                self.vfs_cat(path)
+            elif command == "vfs-info":
+                self.vfs_info()
             else:
                 print(f"Command not found: {command}")
                 self.error_flag = True
