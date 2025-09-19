@@ -79,6 +79,8 @@ class VFS:
                 'name': os.path.basename(file_path)
             }
         
+    
+        
 vfs = VFS('./vfs')
 print(vfs.filesystem)
 print("VFS loaded into memory!")

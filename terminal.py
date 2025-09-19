@@ -3,7 +3,6 @@ import subprocess
 import argparse
 import csv
 from datetime import datetime
-from vfs import VFS
 
 class Terminal:
     
@@ -30,14 +29,14 @@ class Terminal:
         if command == "exit":
             exit()
         
-        if command[0:5] == "echo ":
+        elif command[0:5] == "echo ":
             command = command.replace('"', "")
             print(command[5:])
 
-        if command == "ls":
+        elif command[0:2] == "ls":
             print("ls: -1 -a -l -s -tn -sn ...")
         
-        if command == "cd":
+        elif command[0:2] == "cd":
             print("cd: -d, -e, -m ...")
 
         else:
@@ -69,15 +68,14 @@ class Terminal:
                 reader = csv.reader(file)
     
                 for row in reader:
-                    print(("".join(row)))
+                    print(self.user + "@hostname:~$ " + ("".join(row)))
                     self.get_command("".join(row))
 
-        if args.vfs:
-            if os.path.exists(args.vfs):
-                self.vfs_path = args.vfs  # Устанавливаем путь
-                self.vfs = VFS(self.vfs_path)
-                print(self.vfs.filesystem)
-                print(f"VFS path set to: {self.vfs_path}")
+        # if args.vfs:
+        #     if os.path.exists(args.vfs):
+        #         self.vfs_path = args.vfs  # Устанавливаем путь
+        #         self.vfs = VFS(self.vfs_path)
+                
 
     def logger(self, to_write):
         with open(self.log_path, 'a', encoding='UTF-8', newline='') as file:  # 'a' вместо 'w'
