@@ -28,8 +28,12 @@ python3 terminal.py --vfs ./test_vfs --logfile logs/terminal.csv --script init.t
 
 ### Command line arguments
 
+```bash
 Argument: --logfile	| short: -l	| description: Path to CSV log file	| default: None	| usage: --logfile output.csv
-
+```
+```bash
 Argument: --script	| short: -s	| description: Path to startup script	| default: None	| usage: --script commands.txt
-
+```
+```bash
 Argument: --vfs	| short: None | description: Path to virtual file system source | default:	None | usage: --vfs ./data
+```
