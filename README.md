@@ -37,3 +37,18 @@ Argument: --script	| short: -s	| description: Path to startup script	| default: 
 ```bash
 Argument: --vfs	| short: None | description: Path to virtual file system source | default:	None | usage: --vfs ./data
 ```
+
+### Available commands
+
+#### Basic commands
+##### echo [text] - Display text
+##### $VARIABLE - Expand environment variables
+##### exit - Exit the terminal
+
+#### VFS Commands (when --vfs is specified):
+
+##### ls [path] - List directory contents
+##### cd [path] - Change directory
+##### pwd - Print working directory
+##### cat [file] - Display file contents
+##### vfs-info - Show VFS information

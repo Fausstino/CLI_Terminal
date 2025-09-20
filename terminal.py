@@ -432,7 +432,16 @@ class Terminal:
         parser.add_argument('--vfs', help="Path to Virtual File System")
         
         args = parser.parse_args()
-        
+
+        if args.vfs:
+            try:
+                self.vfs = VFS(args.vfs)
+                print(f"VFS loaded successfully from: {args.vfs}")
+                print("Commands ls, cd, cat, pwd, rm, chmod now work with VFS")
+            except Exception as e:
+                print(f"Error loading VFS: {e}")
+                print("Running without VFS support")
+                
         # Обработка logfile
         if args.logfile:
             self.log_path = args.logfile
@@ -451,14 +460,7 @@ class Terminal:
                 print(f"Script not found: {args.script}")
         
         # Обработка VFS
-        if args.vfs:
-            try:
-                self.vfs = VFS(args.vfs)
-                print(f"VFS loaded successfully from: {args.vfs}")
-                print("Commands ls, cd, cat, pwd, rm, chmod now work with VFS")
-            except Exception as e:
-                print(f"Error loading VFS: {e}")
-                print("Running without VFS support")
+        
 
     def execute_script(self):
         """Выполняет команды из скрипта"""

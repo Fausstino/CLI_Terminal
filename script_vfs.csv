@@ -1,0 +1,6 @@
+ls
+cd bin
+ls
+pwd
+rm pwd
+chmod 755 ls
